@@ -4,14 +4,8 @@
   "main": "server.js",
   "type": "commonjs",
   "scripts": {
-    "dev": "ts-node server.ts",
-    "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "ts-node server.ts"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
     "chalk": "^5.4.1",
     "cors": "^2.8.5",
