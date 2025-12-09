@@ -4,7 +4,7 @@ type Response = express.Response;
 //TypeScript Typdeklaration / Type Alias: erstellen einen Type Alias namens Request---> statt express.Request einfach Request verwenden.
 
 import cors from "cors";
-import * as chalk from "chalk";
+import chalk from "chalk";
 
 import { query } from "./db/index";
 
@@ -65,5 +65,5 @@ app.post("/posts", async (req: Request, res: Response) => {
   }
 });
 app.listen(port, () => {
-  console.log(chalk.green(`Server läuft auf port ${port}`));
+  console.log(chalk.greenBright(`Server läuft auf port ${port}`));
 });
