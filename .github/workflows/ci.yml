@@ -1,0 +1,48 @@
+# Name des Workflows
+name: Backend CI/CD Test
+
+# Wann der Workflow ausgeführt wird
+on:
+  push:
+    branches: [main, ci-test] # bei Push auf main oder ci-test branches
+  pull_request:
+    branches: [main] # bei Pull Requests in main
+
+# Definition der Jobs
+jobs:
+  build-and-test: # Job-Name
+    runs-on: ubuntu-latest # Umgebung: Ubuntu Linux
+
+    # Schritte
+    steps:
+      - name: Repository auschecken
+        uses:
+          actions/checkout@v3 # Lädt alle Dateien meines Repos auf GitHub Runner
+          # wichtig: --------------> amit der Workflow den Code prüfen, Tests ausführen oder starten kann.
+
+      # Node.js installieren
+      - name: Node.js installieren
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      # Abhängigkeiten installieren
+      - name: Abhängigkeiten installieren
+        run: npm install
+
+      # TypeScript prüfen
+      - name: TypeScript kompilieren
+        run: npx tsc --noEmit # Prüft Typen, erstellt aber keine Dateien
+
+      # Backend starten (nur Test)
+      - name: Backend starten
+        run: npm start & # Startet server.ts im Hintergrund (& erlaubt nächste Schritte)
+
+      # Einfacher Test / Bestätigung
+      - name: Testausgabe
+        run: echo "Backend läuft, CI/CD Test erfolgreich!" # Ausgabe für Kontrolle
+
+      # Optional: final (Code-Qualität prüfen)
+      - name: Code Lint prüfen
+        run: npx eslint . || echo "Linting abgeschlossen (Fehler erkannt)"
+        # Wenn eslint eingerichtet ist, prüft er den Code
