@@ -1,4 +1,4 @@
-//PG-Verbindung
+// PG-Verbindung – Änderung für YOLO 🙂
 import { Pool } from "pg";
 import * as dotenv from "dotenv";
 import { QueryResult } from "pg";
