@@ -16,9 +16,8 @@ jobs:
     # Schritte
     steps:
       - name: Repository auschecken
-        uses:
-          actions/checkout@v3 # Lädt alle Dateien meines Repos auf GitHub Runner
-          # wichtig: --------------> amit der Workflow den Code prüfen, Tests ausführen oder starten kann.
+        uses: actions/checkout@v3 # Lädt alle Dateien meines Repos auf GitHub Runner
+        # wichtig: damit der Workflow den Code prüfen, Tests ausführen oder starten kann.
 
       # Node.js installieren
       - name: Node.js installieren
@@ -36,7 +35,7 @@ jobs:
 
       # Backend starten (nur Test)
       - name: Backend starten
-        run: npm start & # Startet server.ts im Hintergrund (& erlaubt nächste Schritte)
+        run: npm start # Startet server.ts im Hintergrund (& erlaubt nicht nächste Schritte)
 
       # Einfacher Test / Bestätigung
       - name: Testausgabe
@@ -44,5 +43,5 @@ jobs:
 
       # Optional: final (Code-Qualität prüfen)
       - name: Code Lint prüfen
-        run: npx eslint . || echo "Linting abgeschlossen (Fehler erkannt)"
+        run: npx eslint .
         # Wenn eslint eingerichtet ist, prüft er den Code
