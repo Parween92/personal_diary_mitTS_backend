@@ -22,8 +22,8 @@ app.get("/posts", async (req: Request, res: Response) => {
     );
     res.json(rows);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ msg: "Server error" });
+    // console.error(error);
+    // res.status(500).json({ msg: "Server error" });
   }
 });
 
