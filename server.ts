@@ -4,7 +4,7 @@ type Response = express.Response;
 //TypeScript Typdeklaration / Type Alias: erstellen einen Type Alias namens Request---> statt express.Request einfach Request verwenden.
 
 import cors from "cors";
-import chalk from "chalk";
+import * as chalk from "chalk";
 
 import { query } from "./db/index.js";
 
