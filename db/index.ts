@@ -19,7 +19,7 @@ type QueryCallback = (err: Error, result: QueryResult<any>) => void;
 const query = async (
   sqlText: string,
   param?: any[]
-): Promise<QueryResult<string>> => {
+): Promise<QueryResult<any>> => {
   return pool.query(sqlText, param);
 };
 
