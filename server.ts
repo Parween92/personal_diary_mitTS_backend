@@ -6,7 +6,7 @@ type Response = express.Response;
 import cors from "cors";
 import chalk from "chalk";
 
-import { query } from "./db/index";
+import { query } from "./db/index.js";
 
 const port = process.env.PORT || 3000;
 
