@@ -8,6 +8,7 @@ import chalk from "chalk";
 
 import { query } from "./db/index";
 import { validateAuthor } from "./db/validators";
+import { validateTitle } from "./db/validators";
 
 const port = process.env.PORT || 3000;
 
@@ -60,6 +61,10 @@ app.post("/posts", async (req: Request, res: Response) => {
     return res
       .status(400)
       .json({ msg: "Author muss Vor- und Nachname mit Großbuchstaben sein" });
+  }
+  //kein Titel angegeben oder der Titel ungültig ist dann Fehler
+  if (!title || !validateTitle(title)) {
+    return res.status(400).json({ msg: "Title muss mind. 3 Zeichen haben" });
   }
   try {
     const { rows } = await query(
