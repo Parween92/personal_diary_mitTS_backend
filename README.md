@@ -12,10 +12,11 @@ Regeln / Merken
 - Vor Push: `npm run build` lokal prüfen.
 - Wenn CI rot: Logs im Schritt “Build” ansehen (tsc-Fehler oder fehlendes Script).
 
-Schritt | Zweck
-| Build | Code kompilieren (tsc) ----> Geht der Code?
-| Lint | Codequalität ----> Ist der Code sauber?
-| Test | Funktionen & APIs prüfen
+| Schritt | Zweck                                       |
+| ------- | ------------------------------------------- |
+| Build   | Code kompilieren (tsc) ----> Geht der Code? |
+| Lint    | Codequalität ----> Ist der Code sauber?     |
+| Test    | Funktionen & APIs prüfen                    |
 
 -------------------------------Nächste--------------------------------------------
 
