@@ -1,4 +1,4 @@
-## CI/CD
+## CI/CD: testet -->  Code kompiliert und Dependencies installieren
 
 - Trigger: Push/PR auf `main` und `ci-cd`.
 - Schritte: Checkout → Node (18.x/20.x Matrix) → npm ci → npm run build (tsc).
@@ -12,9 +12,16 @@ Regeln / Merken
 - Vor Push: `npm run build` lokal prüfen.
 - Wenn CI rot: Logs im Schritt “Build” ansehen (tsc-Fehler oder fehlendes Script).
 
+CI/CD Schritte:
+| Schritt | Zweck |
+|---------|-------|
+| Build   | Code kompilieren (tsc) |
+| Lint    | Codequalität |
+| Test    | Funktionen & APIs prüfen |
+
 -------------------------------Nächste--------------------------------------------
 
-## Unit-Tests
+## Unit-Tests: Eine Funktion testen bevor im Backend laufen soll getrennt aber immer 
 
 - Framework: Jest + ts-jest
 - Laufen: `npm test`
@@ -23,3 +30,16 @@ Regeln / Merken
   - `validateAuthor`: Vor- und Nachname, beide groß
   - `validateTitle`: Mind. 3 Zeichen (getrimmt)
 - Nutzen: Funktionen getrennt(Validators) prüfen, bevor sie im Backend laufen
+
+-------------------------------Nächste--------------------------------------------
+
+## API-Tests: ganze Route testen im Backend Also Funktion + Express-Route + Response zusammen
+
+- Framework: Jest + Supertest
+- Laufen: `npm test`
+- Tests liegen in `tests/api/`
+- Was getestet wird:
+  - POST `/posts` mit ungültigem Author → 400-Fehler
+  - POST `/posts` mit zu kurzem Titel → 400-Fehler
+  - GET `/posts` (Daten korrekt zurückgegeben)
+- Nutzen: Prüft, dass Validierung **wirklich im Backend läuft** (nicht nur Funktion)

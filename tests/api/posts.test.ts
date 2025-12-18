@@ -1,3 +1,5 @@
+// Routes testen
+
 jest.mock("chalk", () => ({
   default: { green: (msg: string) => msg },
 }));
@@ -61,8 +63,3 @@ describe("POST /posts", () => {
     expect(res.body.msg).toContain("3 Zeichen");
   });
 });
-
-//Erklärung: Routes testen
-//Sagt zur Fake-DB: "Gib mir 2 Posts zurück"
-//Ruft die Route GET /posts auf
-// Schaut, ob die Antwort stimmt ja dann 200 OK und 2 Posts im Body sonst Fehler

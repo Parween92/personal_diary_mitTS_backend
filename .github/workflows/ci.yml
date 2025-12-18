@@ -36,6 +36,7 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Run tests (optional)
-        if: false
+      - name: Run tests
+        # if: false // war disabled
+        # Jetzt: Tests laufen bei jedem Push/PR automatisch
         run: npm test
