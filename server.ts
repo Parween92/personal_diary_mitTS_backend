@@ -95,6 +95,15 @@ app.delete("/posts/:id", async (req: Request, res: Response) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(chalk.green(`Server läuft auf port ${port}`));
-});
+// app.listen(port, () => {
+//   console.log(chalk.green(`Server läuft auf port ${port}`));
+// });
+
+// Für E2E-APi Test:  Nur Server starten, wenn direkt ausgeführt (nicht im Test)
+if (module === require.main) {
+  app.listen(port, () => {
+    console.log(chalk.green(`Server läuft auf port ${port}`));
+  });
+}
+
+export default app;
