@@ -1,3 +1,5 @@
+// Routes testen
+
 jest.mock("chalk", () => ({
   default: { green: (msg: string) => msg },
 }));
@@ -10,7 +12,7 @@ jest.mock("../../db/index", () => ({
 import request from "supertest";
 import app from "../../server";
 
-//Ersetzten die echte query-Funktion durch eine Fake-Funktion, damit keine echte DB angesprochen wird
+//Ersetzen die echte query-Funktion durch eine Fake-Funktion, damit keine echte DB angesprochen wird
 import { query } from "../../db/index";
 const mockQuery = query as jest.MockedFunction<typeof query>;
 
@@ -19,7 +21,7 @@ describe("GET /posts", () => {
     jest.clearAllMocks();
   });
 
-  //Test ob alle Posts zurückgegeben werden
+  //Testen ob alle Posts zurückgegeben werden
   it("gibt alle Posts zurück", async () => {
     const mockData = { rows: [{ id: 1 }, { id: 2 }], rowCount: 2 };
     mockQuery.mockResolvedValue(mockData as any);
@@ -32,7 +34,7 @@ describe("GET /posts", () => {
   });
 });
 
-//❌ Author fehlt, Author klein und Titel zu kurz
+//❌ Author fehlt, Author klein und Titel zu kurz--> Dann fehler :(
 describe("POST /posts", () => {
   it("lehnt Post ohne Author ab", async () => {
     const res = await request(app)
@@ -61,8 +63,3 @@ describe("POST /posts", () => {
     expect(res.body.msg).toContain("3 Zeichen");
   });
 });
-
-//Erklärung: Routes testen
-//Sagt zur Fake-DB: "Gib mir 2 Posts zurück"
-//Ruft die Route GET /posts auf
-// Schaut, ob die Antwort stimmt ja dann 200 OK und 2 Posts im Body sonst Fehler
