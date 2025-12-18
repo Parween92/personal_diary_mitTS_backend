@@ -7,6 +7,7 @@ import cors from "cors";
 import chalk from "chalk";
 
 import { query } from "./db/index";
+import { validateAuthor } from "./db/validators";
 
 const port = process.env.PORT || 3000;
 
@@ -51,8 +52,15 @@ app.get("/posts/:id", async (req: Request, res: Response) => {
 app.post("/posts", async (req: Request, res: Response) => {
   const { author, title, content, cover, date, category, status } = req.body;
 
-  if (!author) return res.status(400).json({ msg: "Author required" });
+  //  WICHTIG FÜR UNI_TESTS: hier soll Validierung in POST-Route einbauen:
+  //  if (!author) return res.status(400).json({ msg: "Author required" });
 
+  //kein Autor angegeben oder der Autor ungültig ist dann Fehler
+  if (!author || !validateAuthor(author)) {
+    return res
+      .status(400)
+      .json({ msg: "Author muss Vor- und Nachname mit Großbuchstaben sein" });
+  }
   try {
     const { rows } = await query(
       "INSERT INTO posts (author, title, content, cover, date, category, status) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;",
@@ -64,6 +72,24 @@ app.post("/posts", async (req: Request, res: Response) => {
     res.status(500).json({ msg: "Server error" });
   }
 });
+
+// DELETE Post
+app.delete("/posts/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const { rowCount } = await query("DELETE FROM posts WHERE id = $1;", [id]);
+
+    if (rowCount === 0) {
+      return res.status(404).json({ msg: "Post not found" });
+    }
+
+    res.status(200).json({ msg: "Post deleted" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Server error" });
+  }
+});
+
 app.listen(port, () => {
   console.log(chalk.green(`Server läuft auf port ${port}`));
 });

@@ -8,7 +8,9 @@
     "prestart": "npm run build",
     "start": "node dist/server.js",
     "dev": "ts-node server.ts",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "test": "jest",
+    "test:ci": "jest --ci --runInBand"
   },
   "dependencies": {
     "chalk": "^5.4.1",
@@ -21,11 +23,16 @@
     "@eslint/js": "^9.39.1",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
+    "@types/jest": "^30.0.0",
     "@types/node": "^24.4.0",
     "@types/pg": "^8.15.5",
+    "@types/supertest": "^6.0.3",
     "eslint": "^9.39.1",
     "eslint-plugin-react": "^7.37.5",
     "globals": "^16.5.0",
+    "jest": "^30.2.0",
+    "supertest": "^7.1.4",
+    "ts-jest": "^29.4.6",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.49.0"
